@@ -1,6 +1,15 @@
 <?php
 namespace Bugarinov\ChainValidation;
 
+/**
+ * Abstract class for the links in the chain which contains the 
+ * validation processes defined by the user. 
+ * 
+ * @package  Bugarinov\ChainValidation
+ * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
+ * @version  0.1.0
+ * @access   public
+ */
 abstract class AbstractLink
 {
     /**
@@ -84,8 +93,16 @@ abstract class AbstractLink
         if ($this->next == null) {
             return $data;
         } else {
+
+            // Execute the next link
             $data = $this->next->execute($data);
             
+            // Get the error messages from the executed
+            // next link and pass the error data to this
+            // link. This is to ensure that the error data
+            // will be passed to the executor link / first link
+            // in the chain. See getError() function in
+            // ChainValidation class
             $this->hasError_ = $this->next->hasError();
             $this->errorMessage = $this->next->getError();
 

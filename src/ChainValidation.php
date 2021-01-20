@@ -1,6 +1,14 @@
 <?php
 namespace Bugarinov\ChainValidation;
 
+/**
+ * The class for executing the links in sequence.
+ * 
+ * @package  Bugarinov\ChainValidation
+ * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
+ * @version  0.1.0
+ * @access   public
+ */
 class ChainValidation
 {
     /**
@@ -46,11 +54,23 @@ class ChainValidation
         return $this->links[0]->execute($data);
     }
 
+    /**
+     * Return the error status of the chain
+     * execution
+     * 
+     * @return bool
+     */
     public function hasError(): bool
     {
         return $this->links[0]->hasError();
     }
 
+    /**
+     * Return the error message that occured
+     * during the chain execution
+     * 
+     * @return string|null
+     */
     public function getErrorMessage(): ?string
     {
         return $this->links[0]->getError();
