@@ -7,7 +7,7 @@ namespace Bugarinov\ChainValidation;
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.0
+ * @version  0.1.1
  * @access   public
  */
 abstract class AbstractLink
@@ -20,20 +20,13 @@ abstract class AbstractLink
     /**
      * @var bool
      */
-    private $hasError_;
+    private $hasError_ = false;
 
     /**
      * @var string
      */
-    protected $errorMessage;
+    protected $errorMessage = null;
 
-    public function __construct()
-    {
-        $this->hasError_ = false;
-        $this->errorMessage = null;
-    }
-
-    
     /**
      * @param string $message
      * 
