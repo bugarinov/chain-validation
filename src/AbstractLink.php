@@ -7,7 +7,7 @@ namespace Bugarinov\ChainValidation;
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.1
+ * @version  0.1.2
  * @access   public
  */
 abstract class AbstractLink
