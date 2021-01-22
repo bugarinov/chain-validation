@@ -1,6 +1,6 @@
 {
     "name": "bugarinov/chain-validation",
-    "description": "Classes which implements the Chain of Command pattern in validating data. Intended primary use is for handling complex validations.",
+    "description": "Classes which implements the Chain of Responsibility pattern in validating data. Intended primary use is for handling complex validations.",
     "type": "library",
     "version": "0.1.1",
     "authors": [

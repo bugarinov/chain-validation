@@ -75,7 +75,7 @@ abstract class AbstractLink
      * 
      * @return array
      */
-    abstract public function execute(array $data): ?array;
+    abstract public function execute(?array $data): ?array;
 
 
     /**

@@ -5,7 +5,7 @@ use Bugarinov\ChainValidation\AbstractLink;
 
 class LinkFail extends AbstractLink
 {
-    public function execute(array $data): ?array
+    public function execute(?array $data): ?array
     {
         
         /**

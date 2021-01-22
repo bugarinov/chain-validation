@@ -5,7 +5,7 @@ use Bugarinov\ChainValidation\AbstractLink;
 
 class LinkSuccess extends AbstractLink
 {
-    public function execute(array $data): ?array
+    public function execute(?array $data): ?array
     {
         /**
          * Do some data validations here.

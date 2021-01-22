@@ -5,7 +5,7 @@ use Bugarinov\ChainValidation\AbstractLink;
 
 class LinkCounting extends AbstractLink
 {
-    public function execute(array $data): ?array
+    public function execute(?array $data): ?array
     {
         $count = count($data);
 
