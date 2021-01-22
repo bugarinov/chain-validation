@@ -3,6 +3,7 @@
     "description": "Classes which implements the Chain of Responsibility pattern in validating data. Intended primary use is for handling complex validations.",
     "type": "library",
     "version": "0.1.2",
+    "license": "MIT",
     "authors": [
         {
             "name": "Yuliy Bugarinov",
@@ -10,8 +11,7 @@
         }
     ],
     "require": {
-        "php": "^7.2 || ^8.0",
-        "ext-json": "*"
+        "php": "^7.2 || ^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
@@ -30,7 +30,8 @@
         "deploy": [
             "rm -r dist/src",
             "cp -r src dist/src",
-            "cp composer.json dist/composer.json"
+            "cp composer.json dist/composer.json",
+            "cp License.txt dist/License.txt"
         ],
         "test":[
             "phpunit -c phpunit.xml"
