@@ -27,12 +27,6 @@
         }
     },
     "scripts": {
-        "deploy": [
-            "rm -r dist/src",
-            "cp -r src dist/src",
-            "cp composer.json dist/composer.json",
-            "cp License.txt dist/License.txt"
-        ],
         "test":[
             "phpunit -c phpunit.xml"
         ]
