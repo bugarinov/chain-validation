@@ -6,6 +6,13 @@ use PHPUnit\Framework\TestCase;
 
 class ChainValidationTest extends TestCase
 {
+    
+    /**
+     * A simple test to check that the
+     * chain execution returned valid results
+     * 
+     * @see LinkSuccess class for details
+     */
     public function testValid()
     {
         $chain = new ChainValidation();
@@ -15,6 +22,12 @@ class ChainValidationTest extends TestCase
         $this->assertEquals(false, $chain->hasError());
     }
 
+    /**
+     * A simple test to check that the
+     * chain execution returned invalid results
+     * 
+     * @see LinkFail class for details
+     */
     public function testInvalid()
     {
         $chain = new ChainValidation();
@@ -24,6 +37,15 @@ class ChainValidationTest extends TestCase
         $this->assertEquals(true, $chain->hasError());
     }
 
+
+
+    /**
+     * A simple test that alters the data and
+     * add the current number of items to the
+     * array.
+     * 
+     * @see LinkCounting class for details
+     */
     public function testData()
     {
         $chain = new ChainValidation();
@@ -40,6 +62,14 @@ class ChainValidationTest extends TestCase
         $this->assertEquals([0,1,2,3,4], $validatedData);
     }
 
+    /**
+     * A simple test that alters the data and
+     * add the current number of items to the
+     * array BUT there is a maximum limit
+     * before the chain execution fails
+     * 
+     * @see LinkCountingHalt class for details
+     */
     public function testErrorData()
     {
         $chain = new ChainValidation();
