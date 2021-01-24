@@ -6,7 +6,7 @@ namespace Bugarinov\ChainValidation;
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.0
+ * @version  0.1.2
  * @access   public
  */
 class ChainValidation
@@ -74,5 +74,16 @@ class ChainValidation
     public function getErrorMessage(): ?string
     {
         return $this->links[0]->getError();
+    }
+
+    /**
+     * Return the error code when an error occured
+     * in the chain execution
+     * 
+     * @return int
+     */
+    public function getErrorCode(): int
+    {
+        return $this->links[0]->getErrorCode();
     }
 }
