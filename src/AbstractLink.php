@@ -7,7 +7,7 @@ namespace Bugarinov\ChainValidation;
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.2
+ * @version  0.1.3
  * @access   public
  */
 abstract class AbstractLink
@@ -28,14 +28,20 @@ abstract class AbstractLink
     protected $errorMessage = null;
 
     /**
+     * @var int
+     */
+    protected $errorCode = 0;
+
+    /**
      * @param string $message
      * 
      * @return null
      */
-    protected function throwError(string $message)
+    protected function throwError(string $message, int $errorCode = 0)
     {
         $this->hasError_ = true;
         $this->errorMessage = $message;
+        $this->errorCode = $errorCode;
 
         return null;
     }
@@ -48,14 +54,25 @@ abstract class AbstractLink
         return $this->hasError_;
     }
 
+    /**
+     * @return string|null
+     */
     public function getError(): ?string
     {
         return $this->errorMessage;
     }
 
     /**
-     * Set the next link to be executed in the chain if the 
-     * validation within the current chain succeeds.
+     * @return int
+     */
+    public function getErrorCode(): int
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * Set the next link to be executed if the 
+     * validation within this link succeeds.
      * 
      * @param AbstractLink $next
      * 
@@ -68,8 +85,8 @@ abstract class AbstractLink
     }
 
     /**
-     * Execute the validations within the current link
-     * andd return the appropriate response
+     * Execute the validations within this link
+     * and return the appropriate response
      * 
      * @param array $data
      * 
@@ -98,6 +115,7 @@ abstract class AbstractLink
             // ChainValidation class
             $this->hasError_ = $this->next->hasError();
             $this->errorMessage = $this->next->getError();
+            $this->errorCode = $this->next->getErrorCode();
 
             return $data;
         }
