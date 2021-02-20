@@ -1,12 +1,14 @@
 <?php
 namespace Bugarinov\ChainValidation;
 
+use Bugarinov\ChainValidation\AbstractLink;
+
 /**
  * The class for executing the links in sequence.
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.2
+ * @version  0.1.3
  * @access   public
  */
 class ChainValidation
@@ -49,7 +51,7 @@ class ChainValidation
      * 
      * @return array|null
      */
-    public function execute(array $data): ?array
+    public function execute(?array $data): ?array
     {
         return $this->links[0]->execute($data);
     }
