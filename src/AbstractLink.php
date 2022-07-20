@@ -7,7 +7,7 @@ namespace Bugarinov\ChainValidation;
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.4
+ * @version  0.1.5
  * @access   public
  */
 abstract class AbstractLink implements LinkInterface
@@ -74,11 +74,11 @@ abstract class AbstractLink implements LinkInterface
      * Set the next link to be executed if the 
      * validation within this link succeeds.
      * 
-     * @param AbstractLink $next
+     * @param LinkInterface $next
      * 
-     * @return AbstractLink
+     * @return LinkInterface
      */
-    public function setNext(AbstractLink $next): AbstractLink
+    public function setNext(LinkInterface $next): LinkInterface
     {
         $this->next = $next;
         return $this;

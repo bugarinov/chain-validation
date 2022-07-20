@@ -1,20 +1,20 @@
 <?php
 namespace Bugarinov\ChainValidation;
 
-use Bugarinov\ChainValidation\AbstractLink;
+use Bugarinov\ChainValidation\LinkInterface;
 
 /**
  * The class for executing the links in sequence.
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.3
+ * @version  0.1.5
  * @access   public
  */
 class ChainValidation
 {
     /**
-     * @var AbstractLink[]
+     * @var LinkInterface[]
      */
     private $links;
 
@@ -25,8 +25,12 @@ class ChainValidation
 
     /**
      * Add the link to the validation list
+     * 
+     * @param LinkInterface $link
+     * 
+     * @return ChainValidation
      */
-    public function add(AbstractLink $link): ChainValidation
+    public function add(LinkInterface $link): ChainValidation
     {
         // Get the current count of validation links
         $linkCount = count($this->links);
