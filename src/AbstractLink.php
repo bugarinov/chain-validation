@@ -7,10 +7,10 @@ namespace Bugarinov\ChainValidation;
  * 
  * @package  Bugarinov\ChainValidation
  * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.3
+ * @version  0.1.4
  * @access   public
  */
-abstract class AbstractLink
+abstract class AbstractLink implements LinkInterface
 {
     /**
      * @var AbstractLink
@@ -37,7 +37,7 @@ abstract class AbstractLink
      * 
      * @return null
      */
-    protected function throwError(string $message, int $errorCode = 0)
+    public function throwError(string $message, int $errorCode = 0)
     {
         $this->hasError_ = true;
         $this->errorMessage = $message;
