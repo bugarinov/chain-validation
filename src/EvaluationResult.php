@@ -9,7 +9,7 @@ namespace Bugarinov\ChainValidation;
  * @version  0.2.0
  * @access   public
  */
-class EvaluationResult
+abstract class EvaluationResult
 {
     /**
      * @var ?array
