@@ -1,6 +1,8 @@
 <?php
 use Bugarinov\ChainValidation\ChainValidation;
 use Bugarinov\ChainValidation\EvaluationResult;
+use Bugarinov\ChainValidation\ResultFailed;
+use Bugarinov\ChainValidation\ResultSuccess;
 use Bugarinov\ChainValidation\Tests\Classes\MockedLink;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +26,7 @@ class WithMockingTest extends TestCase
         $mock->expects($this->once())
             ->method('evaluate')
             ->with($payload)
-            ->willReturn(new EvaluationResult(null, 'error', 400));
+            ->willReturn(new ResultFailed('error', 400));
 
         // Execute the chain
         $result = $chain->execute($payload);
@@ -51,7 +53,7 @@ class WithMockingTest extends TestCase
         $mock->expects($this->once())
             ->method('evaluate')
             ->with($payload)
-            ->willReturn(new EvaluationResult($payload));
+            ->willReturn(new ResultSuccess($payload));
 
         // Execute the chain
         $result = $chain->execute($payload);
@@ -77,12 +79,12 @@ class WithMockingTest extends TestCase
         // Set expectations
         $mock1->expects($this->once())
             ->method('evaluate')
-            ->willReturn(new EvaluationResult(['hello']));
+            ->willReturn(new ResultSuccess(['hello']));
 
         $mock2->expects($this->once())
             ->method('evaluate')
             ->with(['hello'])
-            ->willReturn(new EvaluationResult(['hello', 'world']));
+            ->willReturn(new ResultSuccess(['hello', 'world']));
 
         // Execute the chain
         $result = $chain->execute([]);

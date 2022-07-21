@@ -3,6 +3,7 @@ namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
 use Bugarinov\ChainValidation\EvaluationResult;
+use Bugarinov\ChainValidation\ResultSuccess;
 
 /**
  * A simple link which will get the number of items
@@ -18,6 +19,6 @@ class LinkCounting extends AbstractLink
         // Add that number to the data
         $data[] = $count;
 
-        return new EvaluationResult($data);
+        return new ResultSuccess($data);
     }
 }

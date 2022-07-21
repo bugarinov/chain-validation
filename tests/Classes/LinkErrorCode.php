@@ -3,6 +3,8 @@ namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
 use Bugarinov\ChainValidation\EvaluationResult;
+use Bugarinov\ChainValidation\ResultFailed;
+use Bugarinov\ChainValidation\ResultSuccess;
 
 class LinkErrorCode extends AbstractLink
 {
@@ -12,16 +14,15 @@ class LinkErrorCode extends AbstractLink
         // in the array
         $count = count($data);
 
-        // Throw an error message and error code. 
-        // Also halt the execution of the chain if
-        // the count reached 4
+        // Return a result failure if the count reached 4
+        // Also return an error code
         if ($count == 4) {
-            return new EvaluationResult(null, 'ERROR WITH CODE!', 401);
+            return new ResultFailed('ERROR WITH CODE!', 401);
         }
 
         // Add the number to the data
         $data[] = $count;
 
-        return new EvaluationResult($data);
+        return new ResultSuccess($data);
     }
 }

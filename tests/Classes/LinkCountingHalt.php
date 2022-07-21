@@ -3,6 +3,8 @@ namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
 use Bugarinov\ChainValidation\EvaluationResult;
+use Bugarinov\ChainValidation\ResultFailed;
+use Bugarinov\ChainValidation\ResultSuccess;
 
 /**
  * A link that will automatically halt the execution of
@@ -16,15 +18,14 @@ class LinkCountingHalt extends AbstractLink
         // in the array
         $count = count($data);
 
-        // Throw an error and halt the execution
-        // of the chain if the count reached 4
+        // Return a result failure if the count reached 4
         if ($count == 4) {
-            return new EvaluationResult(null, 'LIMIT REACHED!');
+            return new ResultFailed('LIMIT REACHED!');
         }
 
         // Add the number to the data
         $data[] = $count;
 
-        return new EvaluationResult($data);
+        return new ResultSuccess($data);
     }
 }
