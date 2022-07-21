@@ -29,9 +29,8 @@ class ValidationOne extends AbstractLink
             return new EvaluationResult(null, 'your error message here', 400);
         }
 
-        // If the validation did not fail, execute the
-        // next link in the chain along with the data 
-        // as the argument
+        // If the validation did not fail, return an
+        // evaluation result which contains the data
         return new EvaluationResult($data);
     }
 }
