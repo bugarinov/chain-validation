@@ -1,5 +1,12 @@
 # Chain Validation
 
+## Notice:
+The latest build is 0.2.x and **is not backwards compatible** with 0.1.x versions. See *Migration* for details.
+<br>
+Alternatively, you can read *0.1.x-README.md* for versions 0.1.x.
+
+<br>
+
 **Chain Validation** is a simple PHP library for handling very complex validations that goes beyond checking of data types, format and values of a given data. It uses the *Chain of Responsibility* design pattern in order to execute each validation in a consecutive manner. The execution will stop once an error occured during the validation process within a link. You can alter the data as it goes through the chain, depending on your requirements.
 
 <br>
@@ -12,20 +19,20 @@ Usage is simple. First, group your validations by purpose/relevance and create a
 ```php
 class ValidationOne extends AbstractLink
 {
-    public function execute(?array $data): ?array
+    public function evaluate(?array $data): EvaluationResult
     {
         // Run your validation process here which will
         // set the value of $validationFailed whether
         // the validation failed (true) or not (false)
 
         if ($validationFailed) {
-            return $this->throwError('your error message here');
+            return new EvaluationResult(null, 'your error message here', 400);
         }
 
         // If the validation did not fail, execute the
         // next link in the chain along with the data 
         // as the argument
-        return $this->executeNext($data);
+        return new EvaluationResult($data);
     }
 }
 ```
@@ -61,6 +68,46 @@ If the chain validation succeeds, it will return the **validated data**, otherwi
 
 <br>
 
+# Migration from 0.1.x to 0.2.x
+
+In order to migrate from 0.1.x to 0.2.x, you just need to replace the `execute` function on each link with the `evaluate` function.
+
+From **v0.1.x**
+
+```php
+class ValidationOne extends AbstractLink
+{
+    public function execute(?array $data): ?array
+    {
+        if ($validationFailed) {
+            return $this->throwError('your error message here');
+        }
+
+        return $this->executeNext($data);
+    }
+}
+```
+
+to **v0.2.x**
+
+```php
+class ValidationOne extends AbstractLink
+{
+    public function evaluate(?array $data): EvaluationResult
+    {
+        if ($validationFailed) {
+            return new EvaluationResult(null, 'your error message here');
+        }
+
+        return new EvaluationResult($data);
+    }
+}
+```
+
+<br>
+
 # Tests
 
 Run the tests using `composer test`.
+
+Tests with mocking of `Link`'s `evaluate` function are added.
