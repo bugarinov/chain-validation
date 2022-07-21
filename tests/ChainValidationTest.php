@@ -1,6 +1,4 @@
 <?php
-namespace Bugarinov\ChainValidation\Tests;
-
 use Bugarinov\ChainValidation\ChainValidation;
 use Bugarinov\ChainValidation\Tests\Classes\LinkCounting;
 use Bugarinov\ChainValidation\Tests\Classes\LinkCountingHalt;
