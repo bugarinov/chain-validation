@@ -1,0 +1,66 @@
+# Chain Validation
+
+**Chain Validation** is a simple PHP library for handling very complex validations that goes beyond checking of data types, format and values of a given data. It uses the *Chain of Responsibility* design pattern in order to execute each validation in a consecutive manner. The execution will stop once an error occured during the validation process within a link. You can alter the data as it goes through the chain, depending on your requirements.
+
+<br>
+
+# Usage
+
+### Defining and executing validations
+
+Usage is simple. First, group your validations by purpose/relevance and create a new class for each validation group which extends the `AbstractLink` class. 
+```php
+class ValidationOne extends AbstractLink
+{
+    public function execute(?array $data): ?array
+    {
+        // Run your validation process here which will
+        // set the value of $validationFailed whether
+        // the validation failed (true) or not (false)
+
+        if ($validationFailed) {
+            return $this->throwError('your error message here');
+        }
+
+        // If the validation did not fail, execute the
+        // next link in the chain along with the data 
+        // as the argument
+        return $this->executeNext($data);
+    }
+}
+```
+
+You can run the validations using the `ChainValidation` class. The chain process each validation in exact order or in *First in, First out* manner.
+
+```php
+$chain = new ChainValidation();
+
+$chain->add(new ValidationOne());
+$chain->add(new ValidationTwo());
+$chain->add(new ValidationThree());
+$chain->add(new ValidationFour());
+
+$validatedData = $chain->execute($data);
+```
+
+### Catching errors
+
+To know whether an error occured or not, you can use the `hasError()` function of the `ChainValidation` class and get the error message using `getError()` function after the validation execution.
+
+```php
+$validatedData = $chain->execute($data);
+
+if ($chain->hasError()) {
+    throw new Exception($chain->error); // or your preferred way of handling errors e.g. returing a response
+}
+
+// Some processes here if the validation succeeds e.g. committing of data to the database
+```
+
+If the chain validation succeeds, it will return the **validated data**, otherwise it will return `null`.
+
+<br>
+
+# Tests
+
+Run the tests using `composer test`.
