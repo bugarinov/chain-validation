@@ -7,7 +7,7 @@ use Bugarinov\ChainValidation\LinkInterface;
  * The class for executing the links in sequence.
  * 
  * @package  Bugarinov\ChainValidation
- * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
+ * @author   Yuliy Bugarin <bugarindev@yahoo.com>
  * @version  0.1.5
  * @access   public
  */
