@@ -3,7 +3,7 @@
 ## Notice:
 The latest build is 0.2.x and **is not backwards compatible** with 0.1.x versions. See *Migration* for details.
 <br>
-Alternatively, you can read *0.1.x-README.md* for versions 0.1.x.
+Alternatively, you can read [0.1.x-README.md](https://github.com/bugarinov/chain-validation/blob/master/0.1.x-README.md) for versions 0.1.x.
 
 <br>
 
@@ -110,4 +110,4 @@ class ValidationOne extends AbstractLink
 
 Run the tests using `composer test`.
 
-Tests with mocking of `Link`'s `evaluate` function are added.
+[Tests](https://github.com/bugarinov/chain-validation/blob/master/tests/WithMockingTest.php) with mocking of `Link`'s `evaluate` function are added.
