@@ -6,8 +6,8 @@ namespace Bugarinov\ChainValidation;
  * validation processes defined by the user. 
  * 
  * @package  Bugarinov\ChainValidation
- * @author   Yuliy Bugarinov <bugarindev@yahoo.com>
- * @version  0.1.5
+ * @author   Yuliy Bugarin <bugarindev@yahoo.com>
+ * @version  0.2.0
  * @access   public
  */
 abstract class AbstractLink implements LinkInterface
@@ -31,20 +31,6 @@ abstract class AbstractLink implements LinkInterface
      * @var int
      */
     protected $errorCode = 0;
-
-    /**
-     * @param string $message
-     * 
-     * @return null
-     */
-    public function throwError(string $message, int $errorCode = 0)
-    {
-        $this->hasError_ = true;
-        $this->errorMessage = $message;
-        $this->errorCode = $errorCode;
-
-        return null;
-    }
 
     /**
      * @return bool
@@ -92,7 +78,23 @@ abstract class AbstractLink implements LinkInterface
      * 
      * @return array
      */
-    abstract public function execute(?array $data): ?array;
+    public function execute(?array $data): ?array
+    {
+        $result = $this->evaluate($data);
+
+        if ($result->hasError()) {
+            
+            $this->hasError_ = $result->hasError();
+            $this->errorMessage = $result->getErrorMessage();
+            $this->errorCode = $result->getErrorCode();
+
+            return null;
+        }
+
+        return $this->executeNext($result->getEvaluatedData());
+    }
+
+    public abstract function evaluate(?array $data): EvaluationResult;
 
 
     /**
