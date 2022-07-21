@@ -1,11 +1,12 @@
 <?php
-namespace Bugarinov\ChainValidation\Tests;
+namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
+use Bugarinov\ChainValidation\EvaluationResult;
 
 class LinkSuccess extends AbstractLink
 {
-    public function execute(?array $data): ?array
+    public function evaluate(?array $data): EvaluationResult
     {
         /**
          * Do some data validations here.
@@ -15,10 +16,10 @@ class LinkSuccess extends AbstractLink
          * the requirement. This will be handling the
          * business logic of the app.
          * 
-         * Call the execute next function and pass the data through
-         * it if all the validations succeed
+         * Return an object of EvaluationResult. When there is no error
+         * just create an EvaluationResult with the $data as the argument.
          */
 
-        return $this->executeNext($data);
+        return new EvaluationResult($data);
     }
 }

@@ -1,11 +1,12 @@
 <?php
-namespace Bugarinov\ChainValidation\Tests;
+namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
+use Bugarinov\ChainValidation\EvaluationResult;
 
 class LinkErrorCode extends AbstractLink
 {
-    public function execute(?array $data): ?array
+    public function evaluate(?array $data): EvaluationResult
     {
         // Get the number of items
         // in the array
@@ -15,12 +16,12 @@ class LinkErrorCode extends AbstractLink
         // Also halt the execution of the chain if
         // the count reached 4
         if ($count == 4) {
-            return $this->throwError('ERROR WITH CODE!', 401);
+            return new EvaluationResult(null, 'ERROR WITH CODE!', 401);
         }
 
         // Add the number to the data
         $data[] = $count;
 
-        return $this->executeNext($data);
+        return new EvaluationResult($data);
     }
 }

@@ -1,7 +1,8 @@
 <?php
-namespace Bugarinov\ChainValidation\Tests;
+namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
+use Bugarinov\ChainValidation\EvaluationResult;
 
 /**
  * A simple link which will get the number of items
@@ -9,7 +10,7 @@ use Bugarinov\ChainValidation\AbstractLink;
  */
 class LinkCounting extends AbstractLink
 {
-    public function execute(?array $data): ?array
+    public function evaluate(?array $data): EvaluationResult
     {
         // Get the current count of data
         $count = count($data);
@@ -17,6 +18,6 @@ class LinkCounting extends AbstractLink
         // Add that number to the data
         $data[] = $count;
 
-        return $this->executeNext($data);
+        return new EvaluationResult($data);
     }
 }

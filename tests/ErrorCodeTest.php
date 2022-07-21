@@ -2,6 +2,7 @@
 namespace Bugarinov\ChainValidation\Tests;
 
 use Bugarinov\ChainValidation\ChainValidation;
+use Bugarinov\ChainValidation\Tests\Classes\LinkErrorCode;
 use PHPUnit\Framework\TestCase;
 
 class ErrorCodeTest extends TestCase

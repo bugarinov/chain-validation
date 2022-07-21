@@ -1,8 +1,8 @@
 <?php
-namespace Bugarinov\ChainValidation\Tests;
+namespace Bugarinov\ChainValidation\Tests\Classes;
 
 use Bugarinov\ChainValidation\AbstractLink;
-
+use Bugarinov\ChainValidation\EvaluationResult;
 
 /**
  * A link that will automatically halt the execution of
@@ -10,7 +10,7 @@ use Bugarinov\ChainValidation\AbstractLink;
  */
 class LinkCountingHalt extends AbstractLink
 {
-    public function execute(?array $data): ?array
+    public function evaluate(?array $data): EvaluationResult
     {
         // Get the number of items
         // in the array
@@ -19,12 +19,12 @@ class LinkCountingHalt extends AbstractLink
         // Throw an error and halt the execution
         // of the chain if the count reached 4
         if ($count == 4) {
-            return $this->throwError('LIMIT REACHED!');
+            return new EvaluationResult(null, 'LIMIT REACHED!');
         }
 
         // Add the number to the data
         $data[] = $count;
 
-        return $this->executeNext($data);
+        return new EvaluationResult($data);
     }
 }

@@ -2,6 +2,10 @@
 namespace Bugarinov\ChainValidation\Tests;
 
 use Bugarinov\ChainValidation\ChainValidation;
+use Bugarinov\ChainValidation\Tests\Classes\LinkCounting;
+use Bugarinov\ChainValidation\Tests\Classes\LinkCountingHalt;
+use Bugarinov\ChainValidation\Tests\Classes\LinkFail;
+use Bugarinov\ChainValidation\Tests\Classes\LinkSuccess;
 use PHPUnit\Framework\TestCase;
 
 class ChainValidationTest extends TestCase
