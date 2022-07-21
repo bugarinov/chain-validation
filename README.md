@@ -26,12 +26,12 @@ class ValidationOne extends AbstractLink
         // the validation failed (true) or not (false)
 
         if ($validationFailed) {
-            return new EvaluationResult(null, 'your error message here', 400);
+            return new ResultFailed('your error message here', 400);
         }
 
         // If the validation did not fail, return an
         // evaluation result which contains the data
-        return new EvaluationResult($data);
+        return new ResultSuccess($data);
     }
 }
 ```
@@ -79,7 +79,7 @@ class ValidationOne extends AbstractLink
     public function execute(?array $data): ?array
     {
         if ($validationFailed) {
-            return $this->throwError('your error message here');
+            return $this->throwError('your error message here', 400);
         }
 
         return $this->executeNext($data);
@@ -95,10 +95,10 @@ class ValidationOne extends AbstractLink
     public function evaluate(?array $data): EvaluationResult
     {
         if ($validationFailed) {
-            return new EvaluationResult(null, 'your error message here');
+            return new ResultFailed('your error message here', 400);
         }
 
-        return new EvaluationResult($data);
+        return new ResultSuccess($data);
     }
 }
 ```
