@@ -20,7 +20,7 @@ class LinkCountingHalt extends AbstractLink
 
         // Return a result failure if the count reached 4
         if ($count == 4) {
-            return new ResultFailed('LIMIT REACHED!');
+            return new ResultFailed('LIMIT REACHED!', 400);
         }
 
         // Add the number to the data
