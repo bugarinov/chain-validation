@@ -92,4 +92,15 @@ class ChainValidation
     {
         return $this->links[0]->getErrorCode();
     }
+
+    /**
+     * Return the error body when an error occured
+     * in the chain execution
+     * 
+     * @return null|array 
+     */
+    public function getErrorBody(): ?array
+    {
+        return $this->links[0]->getErrorBody();
+    }
 }
