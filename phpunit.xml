@@ -1,5 +1,9 @@
-<phpunit 
-    bootstrap="vendor/autoload.php">
+<phpunit bootstrap="vendor/autoload.php">
+    <coverage>
+        <include>
+            <directory>./src</directory>
+        </include>
+    </coverage>
     <testsuite name='MainTest'>
         <directory suffix='Test.php'>./tests/</directory>
     </testsuite>
