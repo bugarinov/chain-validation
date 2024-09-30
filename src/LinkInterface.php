@@ -14,6 +14,7 @@ interface LinkInterface
     function hasError(): bool;
     function getError(): ?string;
     function getErrorCode(): int;
+    function getErrorBody(): ?array;
     function setNext(LinkInterface $next): LinkInterface;
     function execute(?array $data): ?array;
 }

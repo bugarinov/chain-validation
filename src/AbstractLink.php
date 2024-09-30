@@ -33,6 +33,11 @@ abstract class AbstractLink implements LinkInterface
     protected $errorCode = 0;
 
     /**
+     * @var ?array
+    */
+    protected $errorBody = null;
+
+    /**
      * @return bool
      */
     public function hasError(): bool
@@ -54,6 +59,14 @@ abstract class AbstractLink implements LinkInterface
     public function getErrorCode(): int
     {
         return $this->errorCode;
+    }
+
+    /**
+     * @return ?array
+     */
+    public function getErrorBody(): ?array
+    {
+        return $this->errorBody;
     }
 
     /**
@@ -87,6 +100,7 @@ abstract class AbstractLink implements LinkInterface
             $this->hasError_ = $result->hasError();
             $this->errorMessage = $result->getErrorMessage();
             $this->errorCode = $result->getErrorCode();
+            $this->errorBody = $result->getErrorBody();
 
             return null;
         }
@@ -118,6 +132,7 @@ abstract class AbstractLink implements LinkInterface
             $this->hasError_ = $this->next->hasError();
             $this->errorMessage = $this->next->getError();
             $this->errorCode = $this->next->getErrorCode();
+            $this->errorBody = $this->next->getErrorBody();
 
             return $data;
         }
