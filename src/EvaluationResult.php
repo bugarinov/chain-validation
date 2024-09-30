@@ -31,11 +31,17 @@ abstract class EvaluationResult
      */
     private $errorMessage;
 
-    public function __construct(?array $evaluatedData, string $errorMessage = null, int $errorCode = 0)
+    /**
+     * @var ?array
+     */
+    private $errorBody;
+
+    public function __construct(?array $evaluatedData, string $errorMessage = null, int $errorCode = 0, ?array $errorBody = null)
     {
         $this->evaluatedData = $evaluatedData;
         $this->errorMessage = $errorMessage;
         $this->errorCode = $errorCode;
+        $this->errorBody = $errorBody;
 
         $this->hasError = $this->errorCode != 0 || $this->errorMessage !== null;
     }
@@ -48,6 +54,11 @@ abstract class EvaluationResult
     public function getErrorCode(): int
     {
         return $this->errorCode;
+    }
+
+    public function getErrorBody(): ?array
+    {
+        return $this->errorBody;
     }
 
     public function getErrorMessage(): string
