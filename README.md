@@ -57,13 +57,52 @@ To know whether an error occured or not, you can use the `hasError()` function o
 $validatedData = $chain->execute($data);
 
 if ($chain->hasError()) {
-    throw new Exception($chain->error); // or your preferred way of handling errors e.g. returing a response
+    throw new Exception($chain->getErrorMessage()); // or your preferred way of handling errors e.g. returing a response
 }
 
 // Some processes here if the validation succeeds e.g. committing of data to the database
 ```
 
 If the chain validation succeeds, it will return the **validated data**, otherwise it will return `null`.
+
+### Errors with a body
+
+There are instances where errors messages are not enough, especially on front-end applications that highlight specific errors on their UI. Hence, a new parameter was added to the constructor of the `ResultFailed` class in order to pass the this data to the chain.
+
+```php
+    $errorBody = [
+        'items_with_error' => [
+            [
+                'item_uid' => '100012',
+                'reason' => 'something went wrong'
+            ]
+        ]
+    ];
+
+    return new ResultFailed('Some items have errors!', 400, $errorBody);
+```
+The error data can be obtained through the `getErrorBody()` function of the `ChainValidation` class and `LinkInterface` implementations.
+
+```php
+// Example of returning an error response using PSR's ResponseInterface
+
+$validatedData = $chain->execute($data);
+
+if ($chain->hasError()) {
+
+    $payload = [
+        'statusCode' => $chain->getErrorCode(),
+        'error' => $chain->getErrorMessage(),
+        'body' => $chain->getErrorBody()
+    ];
+
+    $response->getBody()
+        ->write(json_encode($payload));
+
+    return $response->withStatus($error_code)
+        ->withHeader('Content-type', 'application/json');
+}
+```
 
 <br>
 
