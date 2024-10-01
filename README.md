@@ -21,16 +21,19 @@ class ValidationOne extends AbstractLink
 {
     public function evaluate(?array $data): EvaluationResult
     {
-        // Run your validation process here which will
-        // set the value of $validationFailed whether
-        // the validation failed (true) or not (false)
-
+        /*
+        * Run your validation process here which will
+        * set the value of $validationFailed whether
+        * the validation failed (true) or not (false)
+        */
         if ($validationFailed) {
             return new ResultFailed('your error message here', 400);
         }
 
-        // If the validation did not fail, return an
-        // evaluation result which contains the data
+        /*
+        * If the validation did not fail, return an
+        * evaluation result which contains the data
+        */
         return new ResultSuccess($data);
     }
 }
@@ -51,7 +54,7 @@ $validatedData = $chain->execute($data);
 
 ### Catching errors
 
-To know whether an error occured or not, you can use the `hasError()` function of the `ChainValidation` class and get the error message using `getError()` function after the validation execution.
+To know whether an error occured or not, you can use the `hasError()` function of the `ChainValidation` class and get the error message using the `getErrorMessage()` function after the validation execution. You can get the corresponding error code using the `getErrorCode()` function.
 
 ```php
 $validatedData = $chain->execute($data);
@@ -61,6 +64,7 @@ if ($chain->hasError()) {
 }
 
 // Some processes here if the validation succeeds e.g. committing of data to the database
+commitToDatabase($validatedData);
 ```
 
 If the chain validation succeeds, it will return the **validated data**, otherwise it will return `null`.
